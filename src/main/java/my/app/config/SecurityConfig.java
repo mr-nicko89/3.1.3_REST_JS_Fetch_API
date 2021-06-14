@@ -57,6 +57,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 .antMatchers("/hello").permitAll()
+
+                .antMatchers("/rest").permitAll() // Убрать когда будет настроен rest контроллер
+                .antMatchers("/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
+                .antMatchers("/rest/admin/**").permitAll() // Убрать когда будет настроен rest контроллер
+
+                .antMatchers(HttpMethod.GET, "/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
+                .antMatchers(HttpMethod.POST, "/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
+                .antMatchers(HttpMethod.DELETE, "/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
+
+
                 .antMatchers("/creatDefaultUsers").permitAll()
 
                 // защищенные URL

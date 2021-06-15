@@ -1,5 +1,7 @@
 package my.app.models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -8,8 +10,13 @@ import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
+
 @Entity
 @Table(name = "roles")
+@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
+
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue
@@ -22,6 +29,7 @@ public class Role implements GrantedAuthority {
     String name;
 
     @ManyToMany(mappedBy = "roleSet")
+    @JsonIgnore
     private Set<User> userSet = new HashSet<>();
 
     public Set<User> getUserSet() {

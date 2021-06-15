@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -27,7 +28,8 @@ public class RestPeopleController {
     @GetMapping("/admin")
     public ResponseEntity<List<User>> readAllUsers() {
         final List<User> users = userService.getAllUsers();
-
+//        System.out.println("user0: " + userService.getUserById(1L));
+//        System.out.println("user roles: " + Arrays.toString(userService.getUserById(1L).getRoles()));
         return users != null && !users.isEmpty()
                 ? new ResponseEntity<>(users, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -1,5 +1,8 @@
 package my.app.models;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,9 +16,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
+
 
 @Entity
 @Table(name = "people")
+@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, isGetterVisibility = NONE, setterVisibility = NONE)
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,11 +47,11 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonIgnore
     private Set<Role> roleSet = new HashSet<>();
 
     public User() {
@@ -99,6 +106,7 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     public Set<Role> getRoleSet() {
         return roleSet;

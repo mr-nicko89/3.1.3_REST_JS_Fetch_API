@@ -5,13 +5,14 @@ import my.app.service.RoleService;
 import my.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/")
+@RequestMapping(value = "/rest/", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RestPeopleController {
 
     private final UserService userService;

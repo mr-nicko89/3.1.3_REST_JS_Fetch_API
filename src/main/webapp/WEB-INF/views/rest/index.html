@@ -19,28 +19,8 @@
     let result = document.getElementById('result');
     let button = document.getElementById('button');
 
-    // button.addEventListener('click', function() {
-    //     let promise = fetch('/rest/admin');
-    //
-    //     promise.then(
-    //         response => {
-    //             return response.text();
-    //         }
-    //     ).then(
-    //         text => {
-    //             result.innerHTML = text;
-    //         }
-    //     );
-    // });
-
-    function countRabbits() {
-        for(let i=1; i<=3; i++) {
-            alert("Кролик номер " + i);
-        }
-    }
-    function getAjax() {
+    button.addEventListener('click', function() {
         let promise = fetch('/rest/admin');
-        // let promise = fetch('/rest/ajax');
 
         promise.then(
             response => {
@@ -49,9 +29,29 @@
         ).then(
             text => {
                 result.innerHTML = text;
-                // console.log(text);
             }
         );
+    });
+
+    function countRabbits() {
+        for(let i=1; i<=3; i++) {
+            alert("Кролик номер " + i);
+        }
     }
+    // function getAjax() {
+    //     let promise = fetch('/rest/admin');
+    //     // let promise = fetch('/rest/ajax');
+    //
+    //     promise.then(
+    //         response => {
+    //             return response.text();
+    //         }
+    //     ).then(
+    //         text => {
+    //             result.innerHTML = text;
+    //             // console.log(text);
+    //         }
+    //     );
+    // }
 </script>
 </html>

@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +27,22 @@ public class RestPeopleController {
         this.userService = userService;
         this.roleService = roleService;
     }
+//Тестовые методы
+@GetMapping("/ajax")
+public ResponseEntity<?> getAjax(){
+    List<String> messages = new ArrayList<>();
+    messages.add("<p>1</p>");
+    messages.add("<p>2</p>");
+    messages.add("<p>3</p>");
+    return !messages.isEmpty()
+            ? new ResponseEntity<>(messages, HttpStatus.OK)
+            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+}
 
+
+
+
+//    Методы для работы с User
     @GetMapping("/admin")
     public ResponseEntity<List<User>> readAllUsers() {
         final List<User> users = userService.getAllUsers();

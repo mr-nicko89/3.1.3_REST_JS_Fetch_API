@@ -78,7 +78,7 @@ public class PeopleController {
 
     @PostMapping("/admin")
     public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, @RequestParam("selectedRole") String[] selectedRole,
-                          Model model) {
+                         Model model) {
         if (bindingResult.hasErrors())
             return "redirect:/admin";
 
@@ -141,4 +141,12 @@ public class PeopleController {
 
         return "redirect:/admin";
     }
+
+    //Тестовые методы
+    @GetMapping("/rest/index")
+    public String restIndex(Model model) {
+        System.out.println("hello!");
+        return "rest/index";
+    }
+
 }

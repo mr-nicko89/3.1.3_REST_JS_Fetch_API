@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test rest index</title>
+</head>
+
+<body>
+<h1>Hello! This is web page to check rest</h1>
+
+<div id="result"></div>
+<input type="submit" id="button">
+<input value="Нажми меня" onclick="alert('Клик!')" type="button">
+
+<input type="button" onclick="countRabbits()" value="Считать кроликов!">
+<input type="button" onclick="getAjax()" value="Получить ajax">
+
+</body>
+<script>
+    let result = document.getElementById('result');
+    let button = document.getElementById('button');
+
+    button.addEventListener('click', function() {
+        let promise = fetch('/rest/admin');
+
+        promise.then(
+            response => {
+                return response.text();
+            }
+        ).then(
+            text => {
+                result.innerHTML = text;
+            }
+        );
+    });
+
+    function countRabbits() {
+        for(let i=1; i<=3; i++) {
+            alert("Кролик номер " + i);
+        }
+    }
+    // function getAjax() {
+    //     let promise = fetch('/rest/admin');
+    //     // let promise = fetch('/rest/ajax');
+    //
+    //     promise.then(
+    //         response => {
+    //             return response.text();
+    //         }
+    //     ).then(
+    //         text => {
+    //             result.innerHTML = text;
+    //             // console.log(text);
+    //         }
+    //     );
+    // }
+</script>
+</html>

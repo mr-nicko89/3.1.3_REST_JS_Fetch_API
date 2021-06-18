@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import java.security.Permission;
+
 @Configuration
 @EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -59,39 +61,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/hello").permitAll()
 
 //               Убрать когда будет настроен rest контроллер ->
-                .antMatchers("/rest").permitAll() // Убрать когда будет настроен rest контроллер
-                .antMatchers("/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
-                .antMatchers("/rest/admin").permitAll() // Убрать когда будет настроен rest контроллер
-                .antMatchers("/rest/admin/**").permitAll() // Убрать когда будет настроен rest контроллер
-
-                .antMatchers(HttpMethod.GET, "/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
-                .antMatchers(HttpMethod.POST, "/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
-                .antMatchers(HttpMethod.DELETE, "/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
-
-                                .antMatchers("/user/**").permitAll()
-
-                .antMatchers("/admin").permitAll()
-                .antMatchers("/admin/new").permitAll()
-                .antMatchers("/admin/{id}").permitAll()
-
-                .antMatchers(HttpMethod.GET, "/people/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/people/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/people/**").permitAll()
+//                .antMatchers("/rest").permitAll() // Убрать когда будет настроен rest контроллер
+//                .antMatchers("/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
+//                .antMatchers("/rest/admin").permitAll() // Убрать когда будет настроен rest контроллер
+//                .antMatchers("/rest/admin/**").permitAll() // Убрать когда будет настроен rest контроллер
+//
+//                .antMatchers(HttpMethod.GET, "/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
+//                .antMatchers(HttpMethod.POST, "/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
+//                .antMatchers(HttpMethod.DELETE, "/rest/**").permitAll() // Убрать когда будет настроен rest контроллер
+//
+//                                .antMatchers("/user/**").permitAll()
+//
+//                .antMatchers("/admin").permitAll()
+//                .antMatchers("/admin/new").permitAll()
+//                .antMatchers("/admin/{id}").permitAll()
+//
+//                .antMatchers(HttpMethod.GET, "/people/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/people/**").permitAll()
+//                .antMatchers(HttpMethod.DELETE, "/people/**").permitAll()
 //<- Убрать когда будет настроен rest контроллер
 
                 .antMatchers("/creatDefaultUsers").permitAll()
 
                 // защищенные URL
 
-//                .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
+                .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
 
-//                .antMatchers("/admin").hasAnyRole("ADMIN")
-//                .antMatchers("/admin/new").hasAnyRole("ADMIN")
-//                .antMatchers("/admin/{id}").hasAnyRole("ADMIN")
-//
-//                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN")
-//                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
+                .antMatchers("/admin").hasAnyRole("ADMIN")
+                .antMatchers("/admin/new").hasAnyRole("ADMIN")
+                .antMatchers("/admin/{id}").hasAnyRole("ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
 
 //Доступ на основе permission
 //                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.USER_READ.getPermission())
@@ -99,7 +101,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.DELETE, "/people/**").hasAuthority(Permission.USER_WRITE.getPermission())
 
                 .anyRequest()
-                .authenticated();
+//                .permitAll();
+                .authenticated(); // Убрать когда будет настроен rest контроллер
     }
 
 

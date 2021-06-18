@@ -150,11 +150,11 @@ public class PeopleController {
     }
 
     @GetMapping("/rest/admin")
-    public String indexAdminRest(@ModelAttribute("userNew") User userNew, Model model) {
+    public String indexAdminRest(@ModelAttribute("userNew") User userNew, Model model1) {
 //        User userRegistered = userService.loadUserByUsername(principal);
 //        model.addAttribute("userRegistered", userRegistered);
-        model.addAttribute("people", userService.getAllUsers());
-        model.addAttribute("roles", roleService.getAllRoles());
+        model1.addAttribute("people", userService.getAllUsers());
+        model1.addAttribute("roles", roleService.getAllRoles());
         return "rest/admin/index";
     }
 }

@@ -17,7 +17,9 @@ function usersData() {
                    <td>${user.age}</td> 
                    <td>${user.email}</td> 
                    <td>${user.password}</td> 
-                   <td>${user.roleSet}</td>
+                   <td>${user.roleSet.map(role =>{
+                       return role.name;
+            })}</td>
                    <td>
                    <!--Ссылка на модальное окно редактирования пользователя-->
                        <button type="button" class="btn btn-info"

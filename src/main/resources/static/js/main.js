@@ -83,6 +83,36 @@ function getPrincipal() {
     });
 }
 
+function addUser() {
+    fetch("/rest/admin", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+            {
+                "name": "testUser",
+                "age": 33,
+                "email": "testUser@email.com",
+                "password": "testUser",
+                "roleSet": [
+                    {"id": 1, "name": "ROLE_ADMIN"}
+                ]
+            }
+        )
+    }).then(response => {
+        // console.log(response);
+        if (!response.ok) {
+            throw Error("ERROR");
+        }
+        return response.json();
+    }).then(data => {
+        console.log(data)
+    }).catch(error => {
+        console.log(error);
+    });
+}
 
+// addUser()
 getPrincipal()
 usersData()

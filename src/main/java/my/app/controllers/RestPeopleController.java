@@ -43,7 +43,7 @@ public ResponseEntity<?> getAjax(){
 
 
 //    Методы для работы с User
-    @GetMapping("/admin")
+    @GetMapping("/listUsers")
     public ResponseEntity<List<User>> readAllUsers() {
         final List<User> users = userService.getAllUsers();
 //        System.out.println("user0: " + userService.getUserById(1L));

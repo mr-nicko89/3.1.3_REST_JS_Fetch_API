@@ -40,7 +40,13 @@ public ResponseEntity<?> getAjax(){
 }
 
 
-
+    @GetMapping("/getPrincipal")
+    public ResponseEntity<User> getPrincipal(Principal principal) {
+        User userRegistered = userService.loadUserByUsername(principal);
+        return userRegistered != null
+                ? new ResponseEntity<>(userRegistered, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 //    Методы для работы с User
     @GetMapping("/listUsers")

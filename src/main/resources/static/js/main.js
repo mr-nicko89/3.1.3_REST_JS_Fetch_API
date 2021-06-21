@@ -9,7 +9,7 @@ function usersData() {
         }
         return response.json();
     }).then(data => {
-        console.log(data);
+        // console.log(data);
         const html = data.map(user => {
             return `
                 <tr class="border-top">
@@ -17,8 +17,8 @@ function usersData() {
                    <td>${user.age}</td> 
                    <td>${user.email}</td> 
                    <td>${user.password}</td> 
-                   <td>${user.roleSet.map(role =>{
-                       return role.name;
+                   <td>${user.roleSet.map(role => {
+                return role.name;
             })}</td>
                    <td>
                    <!--Ссылка на модальное окно редактирования пользователя-->
@@ -38,7 +38,7 @@ function usersData() {
 `;
         })
             .join("");
-        console.log(html);
+        // console.log(html);
         document
             .querySelector('#usersList')
             .insertAdjacentHTML("afterbegin", html);
@@ -48,4 +48,27 @@ function usersData() {
     });
 }
 
+function getPrincipal() {
+    fetch("/rest/getPrincipal").then(response => {
+        // console.log(response);
+        if (!response.ok) {
+            throw Error("ERROR");
+        }
+        return response.json();
+    }).then(dataPrincipal => {
+            const htmlPrincipal = `<span class="navbar-brand" href="#">${dataPrincipal.email} with roles: ${
+                dataPrincipal.roleSet.map(roles => roles.name).join("")
+            }</span>`;
+            console.log(htmlPrincipal);
+        document
+            .querySelector('#principal')
+            .insertAdjacentHTML("afterbegin", htmlPrincipal);
+        }
+    ).catch(error => {
+        console.log(error);
+    });
+}
+
+
+getPrincipal()
 usersData()

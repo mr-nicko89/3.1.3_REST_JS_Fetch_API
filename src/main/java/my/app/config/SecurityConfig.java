@@ -59,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 .antMatchers("/hello").permitAll()
+                .antMatchers("favicon.ico").permitAll()
 
 //               Убрать когда будет настроен rest контроллер ->
 //                .antMatchers("/rest").permitAll() // Убрать когда будет настроен rest контроллер

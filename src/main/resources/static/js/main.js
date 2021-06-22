@@ -119,29 +119,44 @@ function addUser(data) {
 }
 
 //Действие при нажатии на Отправить в форме Создания пользователя
-
-
 async function SendForm(event) {
     // останавливает действие по умолчанию
     event.preventDefault();
 
-    // event.target — это HTML-элемент form
-    let formData = new FormData(event.target);
+    let elementUserRoles = document.getElementById('selectedRoleNewUser');
 
-    // // Собираем данные формы в объект
-    let obj = {};
+    let roleSelectedValues = Array.from(elementUserRoles.selectedOptions).map(el => el.value);
+    let roleArray = convertToRoleSet(roleSelectedValues);
 
-    formData.forEach((value, key) => obj[key] = value);
+    let formData = {
+        name: document.querySelector('#nameNewUser').value,
+        age: document.querySelector('#ageNewUser').value,
+        email: document.querySelector('#emailNewUser').value,
+        password: document.querySelector('#passwordNewUser').value,
 
-    addUser(obj);
-
+        roleSet: roleArray
+    };
+    addUser(formData);
 };
+
+//Преобразуем роли в roleSet
+//TODO Переписать заполнение из Get запроса
+function convertToRoleSet(Array) {
+    let roleArray = [];
+
+    if (Array.indexOf("ROLE_USER") !== -1) {
+        roleArray.unshift({id: 2, name: "ROLE_USER"});
+    }
+    if (Array.indexOf("ROLE_ADMIN") !== -1) {
+        roleArray.unshift({id: 1, name: "ROLE_ADMIN"});
+    }
+    return roleArray;
+}
 
 // при щелчке на кнопку отправки формы
 // отправляем форму на сервер
 document.querySelector('#formNewUser').onsubmit = SendForm;
 
 
-// addUser()
 getPrincipal();
 usersData();

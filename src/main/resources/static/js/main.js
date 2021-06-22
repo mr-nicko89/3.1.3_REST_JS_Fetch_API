@@ -123,31 +123,8 @@ function addUser(data) {
         body: JSON.stringify(
             data
         )
-        // body: JSON.stringify(
-        //     {
-        //         "name": "testUser",
-        //         "age": 33,
-        //         "email": "testUser@email.com",
-        //         "password": "testUser",
-        //         "roleSet": [
-        //             {"id": 1, "name": "ROLE_ADMIN"}
-        //         ]
-        //     }
-        // )
-        // body: new FormData(userForm)
-    })
-    //     .then(response => {
-    //     // console.log(response);
-    //     if (!response.ok) {
-    //         throw Error("ERROR");
-    //     }
-    //     return response.json();
-    // }).then(data => {
-    //     console.log(data)
-    // }).catch(error => {
-    //     console.log(error);
-    // })
-    ;
+    });
+
 }
 
 //Действие при нажатии на Отправить в форме Создания пользователя
@@ -169,10 +146,44 @@ async function SendForm(event) {
         roleSet: roleArray
     };
     addUser(formData);
+    //Отчистить форму
+    event.target.reset();
+    //Добавить строку в Users table
+
+    const htmlAddNewUser = `
+                <tr class="border-top">
+                   <td>${formData.name}</td> 
+                   <td>${formData.age}</td> 
+                   <td>${formData.email}</td> 
+                   <td>${formData.password}</td> 
+                   <td>${formData.roleSet.map(role => {
+        return role.name;
+    })}</td>
+                   <td>
+                   <!--Ссылка на модальное окно редактирования пользователя-->
+                       <button type="button" class="btn btn-info"
+                                data-bs-toggle="modal" data-bs-target="#editUserModal">Edit
+                       </button> 
+                   </td>
+                    <!--Модальное окно удаления пользователя-->
+                    <td>
+                    <!--Ссылка на модальное окно удаления пользователя-->
+                        <button type="button" class="btn btn-danger"
+                                data-bs-toggle="modal" data-bs-target="#deleteUserModal"> 
+                            Delete
+                        </button>
+                    </td>
+                </tr> 
+`;
+    document
+        .querySelector('#usersList')
+        .insertAdjacentHTML("beforeend", htmlAddNewUser);
+
+    //Перейти на вкладку Users table
+    document.getElementById('usersTable-tab').click();
 };
 
 //Преобразуем роли в roleSet
-//TODO Переписать заполнение из Get запроса
 function convertToRoleSet(Array) {
     let roleSelectedArray = [];
 
@@ -185,10 +196,11 @@ function convertToRoleSet(Array) {
     return roleSelectedArray;
 }
 
+
+
 // при щелчке на кнопку отправки формы
 // отправляем форму на сервер
 document.querySelector('#formNewUser').onsubmit = SendForm;
-
 
 getPrincipal();
 usersData();

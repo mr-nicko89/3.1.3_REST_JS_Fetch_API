@@ -13,7 +13,7 @@ TODO
 2.6 Реализовать подгрузку из rest-контроллера данных
 +2.6.1 Principal данные в шапке сайта
 +2.6.2 Списка пользователей
-2.6.3 Отправка формы new User
++2.6.3 Отправка формы new User
 (https://only-to-top.ru/blog/programming/2019-09-17-otpravka-dannyh-fetch-api.html)
 2.6.4 Кнопка edit
 2.6.5 Кнопка delete

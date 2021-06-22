@@ -83,23 +83,28 @@ function getPrincipal() {
     });
 }
 
-function addUser() {
+function addUser(data) {
+    console.log(JSON.stringify(data))
     fetch("/rest/admin", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(
-            {
-                "name": "testUser",
-                "age": 33,
-                "email": "testUser@email.com",
-                "password": "testUser",
-                "roleSet": [
-                    {"id": 1, "name": "ROLE_ADMIN"}
-                ]
-            }
+            data
         )
+        // body: JSON.stringify(
+        //     {
+        //         "name": "testUser",
+        //         "age": 33,
+        //         "email": "testUser@email.com",
+        //         "password": "testUser",
+        //         "roleSet": [
+        //             {"id": 1, "name": "ROLE_ADMIN"}
+        //         ]
+        //     }
+        // )
+        // body: new FormData(userForm)
     }).then(response => {
         // console.log(response);
         if (!response.ok) {
@@ -113,6 +118,30 @@ function addUser() {
     });
 }
 
+//Действие при нажатии на Отправить в форме Создания пользователя
+
+
+async function SendForm(event) {
+    // останавливает действие по умолчанию
+    event.preventDefault();
+
+    // event.target — это HTML-элемент form
+    let formData = new FormData(event.target);
+
+    // // Собираем данные формы в объект
+    let obj = {};
+
+    formData.forEach((value, key) => obj[key] = value);
+
+    addUser(obj);
+
+};
+
+// при щелчке на кнопку отправки формы
+// отправляем форму на сервер
+document.querySelector('#formNewUser').onsubmit = SendForm;
+
+
 // addUser()
-getPrincipal()
-usersData()
+getPrincipal();
+usersData();

@@ -1,5 +1,6 @@
 package my.app.controllers;
 
+import my.app.models.Role;
 import my.app.models.User;
 import my.app.service.RoleService;
 import my.app.service.UserService;
@@ -52,12 +53,19 @@ public ResponseEntity<?> getAjax(){
     @GetMapping("/listUsers")
     public ResponseEntity<List<User>> readAllUsers() {
         final List<User> users = userService.getAllUsers();
-//        System.out.println("user0: " + userService.getUserById(1L));
-//        System.out.println("user roles: " + Arrays.toString(userService.getUserById(1L).getRoles()));
         return users != null && !users.isEmpty()
                 ? new ResponseEntity<>(users, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/listRoles")
+    public ResponseEntity<List<Role>> readAllRoles() {
+        final List<Role> roles = roleService.getAllRoles();
+        return roles != null && !roles.isEmpty()
+                ? new ResponseEntity<>(roles, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
     @PostMapping("/admin")
     public ResponseEntity<?> createNewUser(@RequestBody User user) {

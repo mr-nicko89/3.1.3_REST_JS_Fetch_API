@@ -1,5 +1,5 @@
 function usersData() {
-    console.log("START FETCH")
+    // console.log("START FETCH")
     //example GET query
 
     fetch("/rest/listUsers").then(response => {
@@ -48,6 +48,36 @@ function usersData() {
     });
 }
 
+function rolesData() {
+    console.log("START FETCH")
+    //example GET query
+
+    fetch("/rest/listRoles").then(response => {
+        // console.log(response);
+        if (!response.ok) {
+            throw Error("ERROR");
+        }
+        return response.json();
+    }).then(data => {
+        // console.log(data);
+
+        const html = data.map(role => {
+
+                return `                
+                <option value="${role.id},${role.name}">${role.name}</option>
+`;
+            }
+        )
+            .join("");
+        // console.log(html);
+        document
+            .querySelector('#selectedRoleNewUser')
+            .insertAdjacentHTML("afterbegin", html);
+    }).catch(error => {
+        console.log(error);
+    });
+}
+
 function getPrincipal() {
     fetch("/rest/getPrincipal").then(response => {
         // console.log(response);
@@ -84,7 +114,7 @@ function getPrincipal() {
 }
 
 function addUser(data) {
-    console.log(JSON.stringify(data))
+    // console.log(JSON.stringify(data))
     fetch("/rest/admin", {
         method: 'POST',
         headers: {
@@ -105,17 +135,19 @@ function addUser(data) {
         //     }
         // )
         // body: new FormData(userForm)
-    }).then(response => {
-        // console.log(response);
-        if (!response.ok) {
-            throw Error("ERROR");
-        }
-        return response.json();
-    }).then(data => {
-        console.log(data)
-    }).catch(error => {
-        console.log(error);
-    });
+    })
+    //     .then(response => {
+    //     // console.log(response);
+    //     if (!response.ok) {
+    //         throw Error("ERROR");
+    //     }
+    //     return response.json();
+    // }).then(data => {
+    //     console.log(data)
+    // }).catch(error => {
+    //     console.log(error);
+    // })
+    ;
 }
 
 //Действие при нажатии на Отправить в форме Создания пользователя
@@ -142,15 +174,15 @@ async function SendForm(event) {
 //Преобразуем роли в roleSet
 //TODO Переписать заполнение из Get запроса
 function convertToRoleSet(Array) {
-    let roleArray = [];
+    let roleSelectedArray = [];
 
-    if (Array.indexOf("ROLE_USER") !== -1) {
-        roleArray.unshift({id: 2, name: "ROLE_USER"});
-    }
-    if (Array.indexOf("ROLE_ADMIN") !== -1) {
-        roleArray.unshift({id: 1, name: "ROLE_ADMIN"});
-    }
-    return roleArray;
+    Array.forEach(element => {
+        roleSelectedArray.unshift({
+            id: element.split(",")[0],
+            name: element.split(",")[1]
+        });
+    })
+    return roleSelectedArray;
 }
 
 // при щелчке на кнопку отправки формы
@@ -160,3 +192,4 @@ document.querySelector('#formNewUser').onsubmit = SendForm;
 
 getPrincipal();
 usersData();
+rolesData();

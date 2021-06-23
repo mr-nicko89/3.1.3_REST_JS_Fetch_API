@@ -31,8 +31,8 @@ function usersData() {
                     <td>
                     <!--Ссылка на модальное окно удаления пользователя-->
                         <button id="userID${user.id}" type="button" class="btn btn-danger userDeleteButton"
-                                data-bs-toggle="modal" data-bs-target="#deleteUserModal" 
-                                onclick="deleteUser(this)"> 
+                                data-bs-toggle="modal" data-bs-target="#deleteUserModal"
+                                onclick="deleteOnClick()"> 
                             Delete
                         </button>
                     </td>

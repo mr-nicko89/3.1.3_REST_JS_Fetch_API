@@ -18,7 +18,7 @@ function usersData() {
                    <td id ="ageUserID">${user.age}</td> 
                    <td id ="emailUserID">${user.email}</td> 
                    <td id ="passwordUserID">${user.password}</td> 
-                   <td>${user.roleSet.map(role => {
+                   <td id ="rolesUserID">${user.roleSet.map(role => {
                 return role.name;
             })}</td>
                    <td>
@@ -32,7 +32,7 @@ function usersData() {
                     <!--Ссылка на модальное окно удаления пользователя-->
                         <button id="userID${user.id}" type="button" class="btn btn-danger userDeleteButton"
                                 data-bs-toggle="modal" data-bs-target="#deleteUserModal"
-                                onclick="deleteOnClick()"> 
+                                onclick="deleteOnClick(this)"> 
                             Delete
                         </button>
                     </td>

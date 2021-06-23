@@ -82,7 +82,7 @@ public ResponseEntity<?> getAjax(){
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PatchMapping("/admin/{id}")
+    @PatchMapping("/admin/edituser")
     public ResponseEntity<?> update(@RequestBody User user) {
         userService.updateUser(user);
 

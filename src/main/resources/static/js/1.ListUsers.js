@@ -23,14 +23,15 @@ function usersData() {
             })}</td>
                    <td>
                    <!--Ссылка на модальное окно редактирования пользователя-->
-                       <button type="button" class="btn btn-info"
-                                data-bs-toggle="modal" data-bs-target="#editUserModal">Edit
+                       <button id="editUserID${user.id}" type="button" class="btn btn-info"
+                                data-bs-toggle="modal" data-bs-target="#editUserModal"
+                                onclick="loadFormEditOnClick(this)">Edit
                        </button> 
                    </td>
                     <!--Модальное окно удаления пользователя-->
                     <td>
                     <!--Ссылка на модальное окно удаления пользователя-->
-                        <button id="userID${user.id}" type="button" class="btn btn-danger userDeleteButton"
+                        <button id="deleteUserID${user.id}" type="button" class="btn btn-danger userDeleteButton"
                                 data-bs-toggle="modal" data-bs-target="#deleteUserModal"
                                 onclick="loadFormDeleteOnClick(this)"> 
                             Delete

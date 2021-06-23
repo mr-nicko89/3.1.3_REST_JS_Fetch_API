@@ -20,8 +20,13 @@ function rolesData() {
         )
             .join("");
         // console.log(html);
+        //Добавляем роли в список пользователей
         document
             .querySelector('#selectedRoleNewUser')
+            .insertAdjacentHTML("afterbegin", html);
+        //Добавляем роли на страницу edit User
+        document
+            .querySelector('#selectedRoleEditUser')
             .insertAdjacentHTML("afterbegin", html);
     }).catch(error => {
         console.log(error);

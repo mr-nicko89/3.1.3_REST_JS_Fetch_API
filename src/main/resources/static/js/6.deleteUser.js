@@ -1,4 +1,4 @@
-function deleteOnClick(context) {
+function loadFormDeleteOnClick(context) {
     let elem = [
         {
             find: "#idUserID",
@@ -48,4 +48,38 @@ function deleteOnClick(context) {
     })
     ;
 
+};
+
+
+//Отправка запроса на удаление пользователя
+function deleteUser(data) {
+    console.log(data);
+    const URL = `/rest/admin/${data.id}`;
+    console.log(URL);
+
+    fetch(URL, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+}
+
+//Действие при нажатии на Отправить в форме Создания пользователя
+async function clickDeleteUser(event) {
+    // останавливает действие по умолчанию
+    event.preventDefault();
+
+    let formData = {
+        id: document.querySelector('#idDeleteUser').value,
+    };
+    deleteUser(formData);
+    //Отчистить форму
+    event.target.reset();
+
+//     //Скрыть модальное окно удаления пользователя
+    $('#deleteUserModal').modal("hide");
+    $(`#trUserID${formData.id}`).remove();
+    // trUserID${user.id}
 };

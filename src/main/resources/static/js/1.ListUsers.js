@@ -12,7 +12,7 @@ function usersData() {
         // console.log(data);
         const html = data.map(user => {
             return `
-                <tr class="border-top">
+                <tr id="trUserID${user.id}" class="border-top">
                 <td hidden id = "idUserID">${user.id}</td>
                    <td id="nameUserID">${user.name}</td> 
                    <td id ="ageUserID">${user.age}</td> 
@@ -32,7 +32,7 @@ function usersData() {
                     <!--Ссылка на модальное окно удаления пользователя-->
                         <button id="userID${user.id}" type="button" class="btn btn-danger userDeleteButton"
                                 data-bs-toggle="modal" data-bs-target="#deleteUserModal"
-                                onclick="deleteOnClick(this)"> 
+                                onclick="loadFormDeleteOnClick(this)"> 
                             Delete
                         </button>
                     </td>

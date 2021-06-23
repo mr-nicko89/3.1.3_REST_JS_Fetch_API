@@ -2,6 +2,9 @@
 // отправляем форму на сервер
 document.querySelector('#formNewUser').onsubmit = SendForm;
 
+// при щелчке на кнопку удаления пользователя в модальном окне
+// удаляем пользователя по id
+document.querySelector('#formDeleteUser').onsubmit = clickDeleteUser;
 
 getPrincipal();
 usersData();

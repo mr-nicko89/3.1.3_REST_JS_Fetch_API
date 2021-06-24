@@ -31,8 +31,10 @@ public class UserDAOImp implements UserDAO {
     }
 
     @Override
-    public void save(User user) {
+    public Long save(User user) {
         entityManager.persist(user);
+        entityManager.flush();
+        return user.getId();
 
     }
 

@@ -7,7 +7,7 @@ import java.security.Principal;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
-    void addUser(User user);
+    Long addUser(User user);
 
     List<User> getAllUsers();
 

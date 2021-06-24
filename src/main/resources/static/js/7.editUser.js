@@ -40,7 +40,7 @@ function loadFormEditOnClick(context) {
             // console.log(rolesInBase);
             $(element.innerHTML).html(() => {
                 const rolesUser = $item.split(",");
-                console.log(rolesUser);
+                // console.log(rolesUser);
                 let html = "";
                 html = rolesInBase;
 
@@ -122,7 +122,6 @@ function editUserList(formDataEditUser) {
                    <td>${formDataEditUser.name}</td>
                    <td>${formDataEditUser.age}</td>
                    <td>${formDataEditUser.email}</td>
-                   <td>${formDataEditUser.password}</td>
                    <td>${formDataEditUser.roleSet.map(role => {
         return role.name;
     })}</td>

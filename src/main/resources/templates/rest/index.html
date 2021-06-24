@@ -93,7 +93,6 @@
                                                         <th>UserName</th>
                                                         <th>Age</th>
                                                         <th>Email</th>
-                                                        <th>Password</th>
                                                         <th>Role</th>
                                                         <th>Edit</th>
                                                         <th>Delete</th>
@@ -129,7 +128,8 @@
                                                                                         <label for="idEditUser"
                                                                                                class="form-label fw-bolder"
                                                                                                readonly>ID</label>
-                                                                                        <input type="text" id="idEditUser"
+                                                                                        <input type="text"
+                                                                                               id="idEditUser"
                                                                                                class="form-control"
                                                                                                readonly/>
                                                                                         <!--th:name="id" th:value="${user.id}"-->
@@ -137,28 +137,32 @@
                                                                                         <label for="nameEditUser"
                                                                                                class="form-label fw-bolder">User
                                                                                             Name</label>
-                                                                                        <input type="text" id="nameEditUser"
+                                                                                        <input type="text"
+                                                                                               id="nameEditUser"
                                                                                                class="form-control"/>
                                                                                         <!--th:name="name" th:value="${user.name}"-->
                                                                                         <!--                                                                                                    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="${user.name}">Name Error</div>-->
                                                                                         <br/>
                                                                                         <label for="ageEditUser"
                                                                                                class="form-label fw-bolder">Age</label>
-                                                                                        <input type="text" id="ageEditUser"
+                                                                                        <input type="text"
+                                                                                               id="ageEditUser"
                                                                                                class="form-control"/>
                                                                                         <!--th:name="age" th:value="${user.age}"-->
                                                                                         <!--                                                                                                    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="${user.age}">Age Error</div>-->
                                                                                         <br/>
                                                                                         <label for="emailEditUser"
                                                                                                class="form-label fw-bolder">Email</label>
-                                                                                        <input type="text" id="emailEditUser"
+                                                                                        <input type="text"
+                                                                                               id="emailEditUser"
                                                                                                class="form-control"/>
                                                                                         <!--th:name="email" th:value="${user.email}"-->
                                                                                         <!--                                                                                                    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="${user.email}">Email Error</div>-->
                                                                                         <br/>
                                                                                         <label for="passwordEditUser"
                                                                                                class="form-label fw-bolder">Password</label>
-                                                                                        <input type="text" id="passwordEditUser"
+                                                                                        <input type="text"
+                                                                                               id="passwordEditUser"
                                                                                                class="form-control"/>
                                                                                         <!--th:name="password" th:value="${user.password}"-->
                                                                                         <!--                                                                                                    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="${user.password}">Password Error</div>-->
@@ -166,7 +170,8 @@
                                                                                         <label for="selectedRoleEditUser"
                                                                                                class="form-label fw-bolder">Role</label>
                                                                                         <select multiple
-                                                                                                id="selectedRoleEditUser" name="selectedRoleEditUser"
+                                                                                                id="selectedRoleEditUser"
+                                                                                                name="selectedRoleEditUser"
                                                                                                 class="form-select"
                                                                                                 size="2"
                                                                                                 aria-label="size 2 select example"></select>
@@ -270,9 +275,9 @@
                                                                                                 class="form-select"
                                                                                                 size="2"
                                                                                                 aria-label="size 2 select example">
-<!--                                                                                            <option id="optionSelectedRoleDeleteUser">-->
-<!--                                                                                                role-->
-<!--                                                                                            </option>-->
+                                                                                            <!--                                                                                            <option id="optionSelectedRoleDeleteUser">-->
+                                                                                            <!--                                                                                                role-->
+                                                                                            <!--                                                                                            </option>-->
                                                                                         </select>
                                                                                         <br/>
                                                                                     </div>

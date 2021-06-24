@@ -41,7 +41,7 @@ function loadFormDeleteOnClick(context) {
                 for (let i = 0; i < items.length; i++) {
                     html += `<option>${items[i]}</option>`;
                 }
-                console.log(html);
+                // console.log(html);
                 return html;
             });       // Outputs the answer
         }
@@ -53,9 +53,9 @@ function loadFormDeleteOnClick(context) {
 
 //Отправка запроса на удаление пользователя
 function deleteUser(data) {
-    console.log(data);
+    // console.log(data);
     const URL = `/rest/admin/${data.id}`;
-    console.log(URL);
+    // console.log(URL);
 
     fetch(URL, {
         method: 'DELETE',

@@ -32,8 +32,8 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
-        userDao.save(user);
+    public Long addUser(User user) {
+        return userDao.save(user);
     }
 
     @Override

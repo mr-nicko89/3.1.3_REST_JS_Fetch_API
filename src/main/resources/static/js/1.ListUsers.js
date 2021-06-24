@@ -13,11 +13,10 @@ function usersData() {
         const html = data.map(user => {
             return `
                 <tr id="trUserID${user.id}" class="border-top">
-                <td hidden id = "idUserID">${user.id}</td>
+                   <td hidden id = "idUserID">${user.id}</td>
                    <td id="nameUserID">${user.name}</td> 
                    <td id ="ageUserID">${user.age}</td> 
                    <td id ="emailUserID">${user.email}</td> 
-                   <td id ="passwordUserID">${user.password}</td> 
                    <td id ="rolesUserID">${user.roleSet.map(role => {
                 return role.name;
             })}</td>

@@ -70,8 +70,8 @@ public class RestPeopleController {
 
     @PostMapping("/admin")
     public ResponseEntity<?> createNewUser(@RequestBody User user) {
-        userService.addUser(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        Long idNewUser = userService.addUser(user);
+        return new ResponseEntity<>(idNewUser, HttpStatus.CREATED);
     }
 
     @GetMapping("/admin/{id}")

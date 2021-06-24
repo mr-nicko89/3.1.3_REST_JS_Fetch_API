@@ -9,7 +9,7 @@ public interface UserDAO {
 
     User getUserById(Long id);
 
-    void save(User user);
+    Long save(User user);
 
     void update(User updatedUser);
 

@@ -19,7 +19,6 @@ function getPrincipal() {
                     <td>${dataPrincipal.name}</td>
                     <td>${dataPrincipal.age}</td>
                     <td>${dataPrincipal.email}</td>
-                    <td>${dataPrincipal.password}</td>
                     <td>${dataPrincipal.roleSet.map(roles => roles.name)}</td>
                 </tr>
 `;

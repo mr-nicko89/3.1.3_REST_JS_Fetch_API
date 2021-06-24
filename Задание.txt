@@ -16,6 +16,7 @@ TODO
 +2.6.3 Отправка формы new User
 (https://only-to-top.ru/blog/programming/2019-09-17-otpravka-dannyh-fetch-api.html)
 2.6.4 Кнопка edit
+2.6.4.1 Убрать столбец Password из списка пользователей
 +2.6.5 Кнопка delete
 +2.6.6 Данные в левой вкладке User
 2.7 Сокрытие данных при зарегистрированном пользователе без прав "ROLE_ADMIN"

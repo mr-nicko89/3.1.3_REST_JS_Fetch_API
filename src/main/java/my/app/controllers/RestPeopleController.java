@@ -28,17 +28,18 @@ public class RestPeopleController {
         this.userService = userService;
         this.roleService = roleService;
     }
-//Тестовые методы
-@GetMapping("/ajax")
-public ResponseEntity<?> getAjax(){
-    List<String> messages = new ArrayList<>();
-    messages.add("<p>1</p>");
-    messages.add("<p>2</p>");
-    messages.add("<p>3</p>");
-    return !messages.isEmpty()
-            ? new ResponseEntity<>(messages, HttpStatus.OK)
-            : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-}
+
+    //Тестовые методы
+    @GetMapping("/ajax")
+    public ResponseEntity<?> getAjax() {
+        List<String> messages = new ArrayList<>();
+        messages.add("<p>1</p>");
+        messages.add("<p>2</p>");
+        messages.add("<p>3</p>");
+        return !messages.isEmpty()
+                ? new ResponseEntity<>(messages, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 
     @GetMapping("/getPrincipal")
@@ -49,7 +50,7 @@ public ResponseEntity<?> getAjax(){
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-//    Методы для работы с User
+    //    Методы для работы с User
     @GetMapping("/listUsers")
     public ResponseEntity<List<User>> readAllUsers() {
         final List<User> users = userService.getAllUsers();
@@ -84,6 +85,10 @@ public ResponseEntity<?> getAjax(){
 
     @PatchMapping("/admin/edituser")
     public ResponseEntity<?> update(@RequestBody User user) {
+        if (user.getPassword().isEmpty()) {
+            User userInBase = userService.getUserById(user.getId());
+            user.setPassword(userInBase.getPassword());
+        }
         userService.updateUser(user);
 
         return new ResponseEntity<>(HttpStatus.OK);

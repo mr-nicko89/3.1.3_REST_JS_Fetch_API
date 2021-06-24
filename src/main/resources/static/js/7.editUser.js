@@ -44,6 +44,8 @@ function loadFormEditOnClick(context) {
                 let html = "";
                 html = rolesInBase;
 
+
+                //Недоделанный код для подсвечивания текущих ролей пользователя(selected)
                 // html.map(elementHTML =>{
                 //     rolesUser.forEach(elementRolesUser => {
                 //         if (elementHTML.search(elementRolesUser)){
@@ -92,50 +94,67 @@ async function clickEditUser(event) {
     let roleArrayEditUser = convertToRoleSet(roleSelectedValuesEditUser);
 
     let formDataEditUser = {
-        name: document.querySelector('#nameNewUser').value,
-        age: document.querySelector('#ageNewUser').value,
-        email: document.querySelector('#emailNewUser').value,
-        password: document.querySelector('#passwordNewUser').value,
+        id: document.querySelector('#idEditUser').value,
+        name: document.querySelector('#nameEditUser').value,
+        age: document.querySelector('#ageEditUser').value,
+        email: document.querySelector('#emailEditUser').value,
+        password: document.querySelector('#passwordEditUser').value,
 
         roleSet: roleArrayEditUser
     };
     editUser(formDataEditUser);
-    // //Отчистить форму
-    // event.target.reset();
+    //Отчистить форму
+    event.target.reset();
+
+    editUserList(formDataEditUser);
+
+    //Скрыть модальное окно удаления пользователя
+    $('#editUserModal').modal("hide");
+};
+
+function editUserList(formDataEditUser) {
 
     //Найти и изменить строку в Users table
-//
-//     const htmlAddEditUser = `
-//                 <tr class="border-top">
-//                    <td>${formDataEditUser.name}</td>
-//                    <td>${formDataEditUser.age}</td>
-//                    <td>${formDataEditUser.email}</td>
-//                    <td>${formDataEditUser.password}</td>
-//                    <td>${formDataEditUser.roleSet.map(role => {
-//         return role.name;
-//     })}</td>
-//                    <td>
-//                    <!--Ссылка на модальное окно редактирования пользователя-->
-//                        <button type="button" class="btn btn-info"
-//                                 data-bs-toggle="modal" data-bs-target="#editUserModal">Edit
-//                        </button>
-//                    </td>
-//                     <!--Модальное окно удаления пользователя-->
-//                     <td>
-//                     <!--Ссылка на модальное окно удаления пользователя-->
-//                         <button type="button" class="btn btn-danger"
-//                                 data-bs-toggle="modal" data-bs-target="#deleteUserModal">
-//                             Delete
-//                         </button>
-//                     </td>
-//                 </tr>
-// `;
-//     document
-//         .querySelector('#usersList')
-//         .insertAdjacentHTML("beforeend", htmlAddEditUser);
 
-    // //Перейти на вкладку Users table
-    // document.getElementById('usersTable-tab').click();
+    // Добавить строку измененного пользователя
+    const htmlAddEditUser = `
+                <tr class="border-top">
+                   <td>${formDataEditUser.name}</td>
+                   <td>${formDataEditUser.age}</td>
+                   <td>${formDataEditUser.email}</td>
+                   <td>${formDataEditUser.password}</td>
+                   <td>${formDataEditUser.roleSet.map(role => {
+        return role.name;
+    })}</td>
+                   <td>
+                   <!--Ссылка на модальное окно редактирования пользователя-->
+                       <button type="button" class="btn btn-info"
+                                data-bs-toggle="modal" data-bs-target="#editUserModal">Edit
+                       </button>
+                   </td>
+                    <!--Модальное окно удаления пользователя-->
+                    <td>
+                    <!--Ссылка на модальное окно удаления пользователя-->
+                        <button type="button" class="btn btn-danger"
+                                data-bs-toggle="modal" data-bs-target="#deleteUserModal">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+`;
+
+// //    Изменить в списке пользователей поля измененные поля после редактирования
+//
+//     let trUser = $(`#trUserID${formDataEditUser.id}`).html();
+//     console.log(trUser);
+
+    //Удалить строку текущего пользователя
+    $(`#trUserID${formDataEditUser.id}`).remove();
+    //Добавить строку измененного пользователя
+    document
+        .querySelector('#usersList')
+        .insertAdjacentHTML("beforeend", htmlAddEditUser);
+
 };
 
 // //Преобразуем роли в roleSet

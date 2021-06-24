@@ -1,20 +1,18 @@
 function addUser(data) {
     // console.log(JSON.stringify(data))
-    let id = "";
-    fetch("/rest/admin", {
+    const id = fetch("/rest/admin", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(
-            data
-        )
+        body: JSON.stringify(data)
     })
-        .then((response) => {
+        .then(response => {
             return response.json();
-        })
-        .then((data) => {
-            id = data;
+        }).then(data => {
+            return data;
+        }).catch(error => {
+            console.log(error);
         });
     return id;
 }
@@ -37,14 +35,15 @@ async function SendForm(event) {
 
         roleSet: roleArray
     };
-    let idNewUser = addUser(formData);
-    console.log(idNewUser);
+
+    let idNewUser = await addUser(formData); // Сюда должен прийти id юзера
+
     //Отчистить форму
     event.target.reset();
-    //Добавить строку в Users table
 
+    //Добавить строку в Users table
     const htmlAddNewUser = `
-                <tr id="trUserID${formData.id}" class="border-top">
+                <tr id="trUserID${idNewUser}" class="border-top">
                    <td hidden id = "idUserID">${idNewUser}</td>
                    <td id="nameUserID">${formData.name}</td> 
                    <td id="ageUserID">${formData.age}</td> 

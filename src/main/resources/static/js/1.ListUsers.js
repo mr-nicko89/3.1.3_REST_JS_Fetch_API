@@ -9,6 +9,7 @@ function usersData() {
         }
         return response.json();
     }).then(data => {
+        // console.log("data");
         // console.log(data);
         const html = data.map(user => {
             return `

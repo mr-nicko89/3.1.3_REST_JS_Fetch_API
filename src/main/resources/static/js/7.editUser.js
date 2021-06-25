@@ -118,24 +118,27 @@ function editUserList(formDataEditUser) {
 
     // Добавить строку измененного пользователя
     const htmlAddEditUser = `
-                <tr class="border-top">
-                   <td>${formDataEditUser.name}</td>
-                   <td>${formDataEditUser.age}</td>
-                   <td>${formDataEditUser.email}</td>
-                   <td>${formDataEditUser.roleSet.map(role => {
+                <tr id="trUserID${formDataEditUser.id}" class="border-top">
+                   <td hidden id="idUserID" >${formDataEditUser.id}</td>
+                   <td id="nameUserID">${formDataEditUser.name}</td>
+                   <td id="ageUserID">${formDataEditUser.age}</td>
+                   <td id="emailUserID">${formDataEditUser.email}</td>
+                   <td id="rolesUserID">${formDataEditUser.roleSet.map(role => {
         return role.name;
     })}</td>
                    <td>
                    <!--Ссылка на модальное окно редактирования пользователя-->
-                       <button type="button" class="btn btn-info"
-                                data-bs-toggle="modal" data-bs-target="#editUserModal">Edit
+                       <button id="editUserID${formDataEditUser.id}" type="button" class="btn btn-info"
+                                data-bs-toggle="modal" data-bs-target="#editUserModal"
+                                onclick="loadFormEditOnClick(this)">Edit
                        </button>
                    </td>
                     <!--Модальное окно удаления пользователя-->
                     <td>
                     <!--Ссылка на модальное окно удаления пользователя-->
-                        <button type="button" class="btn btn-danger"
-                                data-bs-toggle="modal" data-bs-target="#deleteUserModal">
+                        <button id="deleteUserID${formDataEditUser.id}" type="button" class="btn btn-danger"
+                                data-bs-toggle="modal" data-bs-target="#deleteUserModal"
+                                onclick="loadFormDeleteOnClick(this)">
                             Delete
                         </button>
                     </td>

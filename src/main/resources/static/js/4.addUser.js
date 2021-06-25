@@ -1,4 +1,4 @@
-function addUser(data) {
+async function addUser(data) {
     // console.log(JSON.stringify(data))
     const id = fetch("/rest/admin", {
         method: 'POST',
@@ -37,6 +37,7 @@ async function SendForm(event) {
     };
 
     let idNewUser = await addUser(formData); // Сюда должен прийти id юзера
+    console.log(idNewUser);
 
     //Отчистить форму
     event.target.reset();

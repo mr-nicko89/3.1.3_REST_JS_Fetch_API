@@ -13,6 +13,7 @@ import java.io.IOException;
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
+//    Вызывается при успешной аутентификации
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse,
@@ -28,4 +29,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //            httpServletResponse.sendRedirect("/user");
 //        }
     }
+////    Вызывается, если аутентификация неуспешна.
+//    @Override
+//    public void start(){
+//
+//    }
 }

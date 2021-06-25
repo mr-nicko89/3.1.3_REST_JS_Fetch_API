@@ -29,19 +29,6 @@ public class RestPeopleController {
         this.roleService = roleService;
     }
 
-    //Тестовые методы
-    @GetMapping("/ajax")
-    public ResponseEntity<?> getAjax() {
-        List<String> messages = new ArrayList<>();
-        messages.add("<p>1</p>");
-        messages.add("<p>2</p>");
-        messages.add("<p>3</p>");
-        return !messages.isEmpty()
-                ? new ResponseEntity<>(messages, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-
     @GetMapping("/getPrincipal")
     public ResponseEntity<User> getPrincipal(Principal principal) {
         User userRegistered = userService.loadUserByUsername(principal);
@@ -106,4 +93,17 @@ public class RestPeopleController {
         //TODO стоит добавить проверку на успешное удаление user
         //https://javarush.ru/groups/posts/2488-obzor-rest-chastjh-3-sozdanie-restful-servisa-na-spring-boot
     }
+
+    //    //Тестовые методы
+//    @GetMapping("/ajax")
+//    public ResponseEntity<?> getAjax() {
+//        List<String> messages = new ArrayList<>();
+//        messages.add("<p>1</p>");
+//        messages.add("<p>2</p>");
+//        messages.add("<p>3</p>");
+//        return !messages.isEmpty()
+//                ? new ResponseEntity<>(messages, HttpStatus.OK)
+//                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
+
 }

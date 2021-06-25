@@ -35,6 +35,15 @@ public class PeopleController {
         return "login";
     }
 
+    @GetMapping("/")
+    public String indexRest(Principal principal) {
+        if (principal == null) {
+            return "login";
+        } else {
+            return "rest/index";
+        }
+    }
+
     @RequestMapping(value = "hello", method = RequestMethod.GET)
     public String printWelcome(Principal principal, ModelMap model) {
 // чтобы посмотреть аутентифицированного пользователя через дебаггер
@@ -52,10 +61,6 @@ public class PeopleController {
         return "hello";
     }
 
-    @GetMapping("/")
-    public String indexRest() {
-        return "rest/index";
-    }
 
     //Тестовые методы
 //    @GetMapping("/rest/index")

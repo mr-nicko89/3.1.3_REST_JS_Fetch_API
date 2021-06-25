@@ -2,7 +2,7 @@ function usersData() {
     // console.log("START FETCH")
     //example GET query
 
-    fetch("/rest/listUsers").then(response => {
+    fetch("/rest/admin/listUsers").then(response => {
         // console.log(response);
         if (!response.ok) {
             throw Error("ERROR");

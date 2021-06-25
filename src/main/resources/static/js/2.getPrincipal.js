@@ -9,7 +9,7 @@ function getPrincipal() {
             const htmlHeaderPrincipal = `<span class="navbar-brand" href="#">${dataPrincipal.email} with roles: ${
                 dataPrincipal.roleSet.map(roles => roles.name).join(" ")
             }</span>`;
-            // console.log(htmlPrincipal);
+//Добавляем в шапку
             document
                 .querySelector('#principal')
                 .insertAdjacentHTML("afterbegin", htmlHeaderPrincipal);
@@ -22,10 +22,10 @@ function getPrincipal() {
                     <td>${dataPrincipal.roleSet.map(roles => roles.name)}</td>
                 </tr>
 `;
+//Добавляем в таблицу с данными активного пользователя
             document
                 .querySelector('#activeUser')
                 .insertAdjacentHTML("afterbegin", htmlActiveUser);
-            // console.log(htmlActiveUser)
         }
     ).catch(error => {
         console.log(error);

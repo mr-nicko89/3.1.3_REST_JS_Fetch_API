@@ -1,10 +1,12 @@
 package my.app.controllers;
 
+import my.app.models.Role;
 import my.app.models.User;
 import my.app.service.RoleService;
 import my.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -37,10 +40,17 @@ public class PeopleController {
 
     @GetMapping("/")
     public String indexRest(Principal principal) {
+        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+        String auth = a.getAuthorities().stream().findFirst().get().toString();
+        String role = roleService.getAdminRole().toString();
+        System.out.println(auth.equals(role));
+
         if (principal == null) {
             return "login";
+        } else if (auth.equals(role)) {
+            return "admin/index";
         } else {
-            return "rest/index";
+            return "user/index";
         }
     }
 
@@ -48,13 +58,16 @@ public class PeopleController {
     public String printWelcome(Principal principal, ModelMap model) {
 // чтобы посмотреть аутентифицированного пользователя через дебаггер
         String str = "You are anonymous";
+        String auth = "You are anonymous";
         if (principal != null) {
             Authentication a = SecurityContextHolder.getContext().getAuthentication();
             str = "You are logged in as a user: " + principal.getName();
+            auth = "You authentication role:" + a.getAuthorities();
         }
         List<String> messages = new ArrayList<>();
         messages.add("Hello!");
         messages.add(str);
+        messages.add(auth);
         messages.add("I'm Spring MVC-SECURITY application");
         messages.add("5.2.0 version by sep'19 ");
         model.addAttribute("messages", messages);

@@ -8,12 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -38,7 +35,7 @@ public class RestPeopleController {
     }
 
     //    Методы для работы с User
-    @GetMapping("/listUsers")
+    @GetMapping("/admin/listUsers")
     public ResponseEntity<List<User>> readAllUsers() {
         final List<User> users = userService.getAllUsers();
         return users != null && !users.isEmpty()
@@ -46,7 +43,7 @@ public class RestPeopleController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/listRoles")
+    @GetMapping("/admin/listRoles")
     public ResponseEntity<List<Role>> readAllRoles() {
         final List<Role> roles = roleService.getAllRoles();
         return roles != null && !roles.isEmpty()
@@ -93,17 +90,4 @@ public class RestPeopleController {
         //TODO стоит добавить проверку на успешное удаление user
         //https://javarush.ru/groups/posts/2488-obzor-rest-chastjh-3-sozdanie-restful-servisa-na-spring-boot
     }
-
-    //    //Тестовые методы
-//    @GetMapping("/ajax")
-//    public ResponseEntity<?> getAjax() {
-//        List<String> messages = new ArrayList<>();
-//        messages.add("<p>1</p>");
-//        messages.add("<p>2</p>");
-//        messages.add("<p>3</p>");
-//        return !messages.isEmpty()
-//                ? new ResponseEntity<>(messages, HttpStatus.OK)
-//                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
-
 }

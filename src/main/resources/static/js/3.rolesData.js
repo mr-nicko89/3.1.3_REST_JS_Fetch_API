@@ -2,7 +2,7 @@ function rolesData() {
     console.log("START FETCH")
     //example GET query
 
-    fetch("/rest/listRoles").then(response => {
+    fetch("/rest/admin/listRoles").then(response => {
         // console.log(response);
         if (!response.ok) {
             throw Error("ERROR");

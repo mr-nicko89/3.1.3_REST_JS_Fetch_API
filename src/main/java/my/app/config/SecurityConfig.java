@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import java.security.Permission;
 
 @Configuration
 @EnableWebSecurity(debug = true)
@@ -30,13 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 // указываем страницу с формой логина
-//                .loginPage("/login") //через PeopleController
                 .loginPage("/") // чеерз RestController
                 //указываем логику обработки при логине
                 .successHandler(new LoginSuccessHandler())
 
                 // указываем action с формы логина
-//                .loginProcessingUrl("/login")
                 .loginProcessingUrl("/login")
                 // Указываем параметры логина и пароля с формы логина
                 .usernameParameter("j_username")
@@ -50,7 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем URL логаута
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 // указываем URL при удачном логауте
-//                .logoutSuccessUrl("/?logout") было
                 .logoutSuccessUrl("/")
                 //выклчаем кроссдоменную секьюрность (на этапе обучения неважна)
                 .and().csrf().disable();
@@ -69,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/rest/admin/**").hasAnyRole("ADMIN")
 
+
                 .antMatchers(HttpMethod.GET, "/rest/admin/**").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/rest/admin/**").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/rest/admin/**").hasAnyRole("ADMIN")
@@ -79,8 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.DELETE, "/people/**").hasAuthority(Permission.USER_WRITE.getPermission())
 
                 .anyRequest()
-//                .permitAll();
-                .authenticated(); // Убрать когда будет настроен rest контроллер
+                .authenticated();
     }
 
 

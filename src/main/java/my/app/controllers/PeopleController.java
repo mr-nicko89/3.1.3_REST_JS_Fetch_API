@@ -40,18 +40,20 @@ public class PeopleController {
 
     @GetMapping("/")
     public String indexRest(Principal principal) {
-        Authentication a = SecurityContextHolder.getContext().getAuthentication();
-        String auth = a.getAuthorities().stream().findFirst().get().toString();
-        String role = roleService.getAdminRole().toString();
-        System.out.println(auth.equals(role));
-
-        if (principal == null) {
-            return "login";
-        } else if (auth.equals(role)) {
-            return "admin/index";
-        } else {
-            return "user/index";
-        }
+//        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+//        String auth = a.getAuthorities().stream().findFirst().get().toString();
+//        String role = roleService.getAdminRole().toString();
+//        System.out.println(auth.equals(role));
+//
+//        if (principal == null) {
+//            return "login";
+//        }
+//        else if (auth.equals(role)) {
+//            return "admin/index";
+//        } else {
+//            return "user/index";
+//        }
+        return "login";
     }
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)

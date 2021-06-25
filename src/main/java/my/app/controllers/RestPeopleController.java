@@ -14,11 +14,11 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/rest/", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/rest/") //Работет и без produces = MediaType.APPLICATION_JSON_VALUE
 public class RestPeopleController {
 
     private final UserService userService;
-    private RoleService roleService;
+    private final RoleService roleService;
 
     @Autowired
     public RestPeopleController(UserService userService, RoleService roleService) {
@@ -29,26 +29,20 @@ public class RestPeopleController {
     @GetMapping("/getPrincipal")
     public ResponseEntity<User> getPrincipal(Principal principal) {
         User userRegistered = userService.loadUserByUsername(principal);
-        return userRegistered != null
-                ? new ResponseEntity<>(userRegistered, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(userRegistered, HttpStatus.OK);
     }
 
     //    Методы для работы с User
     @GetMapping("/admin/listUsers")
     public ResponseEntity<List<User>> readAllUsers() {
         final List<User> users = userService.getAllUsers();
-        return users != null && !users.isEmpty()
-                ? new ResponseEntity<>(users, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return  new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("/admin/listRoles")
     public ResponseEntity<List<Role>> readAllRoles() {
         final List<Role> roles = roleService.getAllRoles();
-        return roles != null && !roles.isEmpty()
-                ? new ResponseEntity<>(roles, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(roles, HttpStatus.OK);
     }
 
 
@@ -69,10 +63,7 @@ public class RestPeopleController {
 
     @PatchMapping("/admin/edituser")
     public ResponseEntity<?> update(@RequestBody User user) {
-        if (user.getPassword().isEmpty()) {
-            User userInBase = userService.getUserById(user.getId());
-            user.setPassword(userInBase.getPassword());
-        }
+
         userService.updateUser(user);
 
         return new ResponseEntity<>(HttpStatus.OK);

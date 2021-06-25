@@ -37,8 +37,12 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void updateUser(User updatedUser) {
-        userDao.update(updatedUser);
+    public void updateUser(User user) {
+        if (user.getPassword().isEmpty()) {
+            User userInBase = userDao.getUserById(user.getId());
+            user.setPassword(userInBase.getPassword());
+        }
+        userDao.update(user);
     }
 
     @Override

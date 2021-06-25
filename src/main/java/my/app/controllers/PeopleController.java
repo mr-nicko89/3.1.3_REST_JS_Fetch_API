@@ -30,27 +30,43 @@ public class PeopleController {
         this.roleService = roleService;
     }
 
-//    @RequestMapping(value = "hello", method = RequestMethod.GET)
-//    public String printWelcome(Principal principal, ModelMap model) {
-//// чтобы посмотреть аутентифицированного пользователя через дебаггер
-//        String str = "You are anonymous";
-//        if (principal != null) {
-//            Authentication a = SecurityContextHolder.getContext().getAuthentication();
-//            str = "You are logged in as a user: " + principal.getName();
-//        }
-//        List<String> messages = new ArrayList<>();
-//        messages.add("Hello!");
-//        messages.add(str);
-//        messages.add("I'm Spring MVC-SECURITY application");
-//        messages.add("5.2.0 version by sep'19 ");
-//        model.addAttribute("messages", messages);
-//        return "hello";
-//    }
-//
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String loginPage() {
         return "login";
     }
+
+    @RequestMapping(value = "hello", method = RequestMethod.GET)
+    public String printWelcome(Principal principal, ModelMap model) {
+// чтобы посмотреть аутентифицированного пользователя через дебаггер
+        String str = "You are anonymous";
+        if (principal != null) {
+            Authentication a = SecurityContextHolder.getContext().getAuthentication();
+            str = "You are logged in as a user: " + principal.getName();
+        }
+        List<String> messages = new ArrayList<>();
+        messages.add("Hello!");
+        messages.add(str);
+        messages.add("I'm Spring MVC-SECURITY application");
+        messages.add("5.2.0 version by sep'19 ");
+        model.addAttribute("messages", messages);
+        return "hello";
+    }
+
+    @GetMapping("/")
+    public String indexRest() {
+        return "rest/index";
+    }
+
+    //Тестовые методы
+//    @GetMapping("/rest/index")
+//    public String restIndex(Model model) {
+//        System.out.println("hello!");
+//        return "rest/index";
+//    }
+
+
+//
+
 //
 //
 //    //Из 2.3.1
@@ -142,16 +158,5 @@ public class PeopleController {
 //        return "redirect:/admin";
 //    }
 
-    //Тестовые методы
-    @GetMapping("/rest/index")
-    public String restIndex(Model model) {
-        System.out.println("hello!");
-        return "rest/index";
-    }
 
-    @GetMapping("/rest/admin")
-    public String indexAdminRest() {
-
-        return "rest/index";
-    }
 }
